@@ -1,0 +1,355 @@
+\documentclass[12pt]{article}
+
+\makeatletter
+\renewcommand{\@seccntformat}[1]{} 	% remove sections
+\makeatother
+
+% footer with a link (argument has no `https://'')
+\newcommand{\footlink}[1]{\footnote{\href{https://#1}{\texttt{#1}}}}
+
+\newcommand{\UCR}{\acro{UCR}\xspace}
+\newcommand{\UCRiverside}{\acro{UC~R}iverside\xspace}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  THE USUAL PACKAGES  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{xspace}
+\usepackage{nopageno}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  PAGE FORMATTING and (RE)NEW COMMANDS  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[margin=2cm]{geometry}
+\graphicspath{{figures/}}
+
+% for capitalized things
+% \newcommand{\acro}[1]{\textsc{\MakeLowercase{#1}}}
+
+% \usepackage{scalefnt} 
+% \newcommand\acro[2][0.875]{{\scalefont{#1}#2}} 
+\newcommand\acro[1]{{\small {#1}}}
+
+\numberwithin{equation}{section}    % set equation numbering
+\renewcommand{\tilde}{\widetilde}   % tilde over characters
+\renewcommand{\vec}[1]{\mathbf{#1}} % vectors are boldface
+
+\newcommand{\dbar}{d\mkern-6mu\mathchar'26}    % for d/2pi
+\newcommand{\ket}[1]{\left|#1\right\rangle}    % <#1|
+\newcommand{\bra}[1]{\left\langle#1\right|}    % |#1>
+\newcommand{\Xmark}{\text{\sffamily X}}        % cross out
+
+% Change list spacing (instead of package paralist)
+\let\oldenumerate\enumerate
+\renewcommand{\enumerate}{
+  \oldenumerate
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}
+
+\let\olditemize\itemize
+\renewcommand{\itemize}{
+  \olditemize
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}
+
+
+%%%%%%%%%%%%%%%%%%%
+%%%  HYPERREF  %%%%
+%%%%%%%%%%%%%%%%%%%
+
+%% This package has to be at the end; can lead to conflicts
+\usepackage{microtype}
+\usepackage[
+	colorlinks=true,
+	citecolor=black,
+	linkcolor=black,
+	urlcolor=green!50!black,
+	hypertexnames=false]{hyperref}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%
+%%%  TITLE DATA  %%%%
+%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+\begin{center}
+
+    {\Large \textsc{Physics 165:} \textbf{Intro to Particle Physics}, Spring 2022}
+
+\end{center}
+
+% \section{Course Data}
+
+\noindent
+\begin{tabular*}{\textwidth}{rlcrl}
+\textsc{Lec:}& Prof.~Flip Tanedo (\texttt{flip.tanedo@ucr.edu})
+&
+\hspace{.25cm}
+&
+\textsc{Lec:} & 
+TR 9:30--10:50am 
+\\
+\textsc{ta:}& Adam Green (\texttt{agree019@ucr.edu})
+&
+\hspace{.25cm}
+&
+ & \textsc{phys} 2104
+\\
+\textsc{grader:} & Robert Clemenson (\texttt{R.Clemenson@sussex.ac.uk})
+&
+\hspace{.25cm}
+&
+\textsc{crn:} & 69522
+\end{tabular*}
+
+% Associated Term: Spring 2022
+% CRN: 69522
+% Campus: Riverside
+% Schedule Type: Lecture
+% Instructional Method: In-Person
+% Section Number: 001
+% Subject: Physics
+% Course Number: 165
+% Title: INTRODUCTION TO PARTICLE PHYSICS
+% Units: 4
+
+% 4 Units, Lecture, 3 hours; discussion, 1 hour. Prerequisite(s): PHYS 156A. Explores the classification of particles in terms of the Standard Model. Includes methods and techniques for particle acceleration and detection; conservation laws and symmetries; the basic interactions of particles (electromagnetic, strong, weak); and electroweak unification.
+
+\subsection*{Critical Information}
+\textsc{web page:} \texttt{\href{https://sites.google.com/ucr.edu/p165/}{sites.google.com/ucr.edu/p165}}\\
+\textsc{canvas:} \texttt{\href{https://elearn.ucr.edu/courses/48560}{elearn.ucr.edu/courses/48560}}
+
+
+\vspace{.5em}
+\noindent Lecture notes, homework and our course calendar will be linked from the course web page. We will post some course readings (e.g. selections from textbooks) on the Canvas page.
+%
+The professor and \acro{TA} office hours will be posted on the course webpage. 
+
+\vspace{.5em}
+\noindent This document was last updated: \today
+
+
+\section{Course Materials}
+
+
+
+\noindent\textbf{Primary}: Course notes are posted to our website and will be our primary reference. We also post selected readings on our course Canvas page as additional references. 
+\vspace{.5em}
+
+\noindent\textbf{Suggested}: \emph{Elementary Particle Physics: An Intuitive Introduction}, Larkoski. This is the closest book to our course.
+\vspace{.5em}
+
+\noindent\textbf{Suggested}: \emph{QED: The Strange Theory of Light \& Matter}, R.~Feynman. This is a public-level book based on Feynman's Douglas Robb lectures. It may fit well as a non-technical supplement to first part of the course.
+
+
+
+\section{Course Description}
+
+Elementary particle physics is the study of the fundamental constituents of matter and the forces that dictate their interactions. This course builds a theoretical understanding of the Standard Model of particle physics based on Feynman diagrams. We will cover kinematics, what it means to have a theory of particle physics, how we perform experiments in particle physics, and what the future holds.
+
+
+\subsection{Course Prerequisites}
+
+
+There are no strict prerequisites. We expect students to have taken the equivalent of:
+\begin{itemize}
+	\item Physics 156A/B (Quantum Mechanics)
+\end{itemize}
+Not having the formal preparation can be made up for with an enthusiasm to take time to dig into the material. If you have concerns about meeting the pre-requisites, please email the professor.
+
+
+\subsection{Course Format}
+
+This course will be \emph{in person}. 
+
+\subsection{Course Expectations}
+
+I \emph{strongly} encourage you to ask questions in class and to discuss with your classmates outside of class. There are two questions that you can \emph{always} ask:
+\begin{enumerate}
+	\item ``\emph{Is it obvious that...?}'' This means: I don't know if I fully understand something. Maybe I'm looking at it the wrong way, what is the best way to see that this is true? 
+	\item ``\emph{Why are we doing this?}'' You may understand the details, but have lost track of the big picture. What is the main point of this section?
+\end{enumerate}
+These are good ways to clarify what we're doing without worrying about ``appearing dumb'' for asking them.
+
+\subsection{Course Policies}
+
+
+\begin{itemize}
+	\item \textbf{Inclusion}: we are committed to creating an inclusive learning space where we respect one another regardless of race/ethnicity, gender identities, gender expressions, sexual orientation, socioeconomic status, age, disabilities, religion, regional background, veteran status, citizenship status, nationality and other diverse identities that we each bring to class.
+	\item \textbf{No bullying}: this course requires students to share work with one another. We will treat each other with respect in our constructive criticism and we will not share each others' materials outside our course without their explicit written permission. Do not be a troll or a bully; we are each offering some vulnerability to support this learning environment. The instructors reserve the right to punish misbehavior with zero credit on assignments or failure in the course. Be kind.
+	\item \textbf{Attendance}: attendance is not part of your grade but is strongly encouraged. You are investing time and resources to be a \UCR student and take this class; the goal of the instructors is for the class time to be valuable rather than simply being a recitation of something you could learn by reading a book. If the instructors are failing at this goal, please contact them to politely inform them of this shortcoming. 
+	\item \textbf{Late homework will not be accepted}. The peer critique aspect of this course is only fair if your peers have access to your work in a timely manner.  
+	\item \textbf{Communication policy}: When emailing the instructors, please include \textbf{[P165]} in the subject line. For example, ``\texttt{[P165] Possible typo on the homework assignment}''. This ensures that the email will be routed properly. The professor anticipates checking course email twice a week on the day of lecture. Physics questions should be asked \emph{in class} where everyone can benefit from the discussion.
+\end{itemize}
+
+\subsection{COVID-19 Policies}
+
+We will follow the \UCR~\acro{COVID} return protocols\footlink{campusreturn.ucr.edu}. Please note that we will not be recording lectures. If you have to miss lectures, please confer with your classmates and the posted course notes. 
+
+\section*{Course Requirements and Assessment}
+
+This course is 4 units. One course unit corresponds to approximately three hours of student time per week. Thus 4 units = 12 hours/week, which roughly translates into 3 hours/week of lecture time and 9 hours/week of out-of-class reading, writing, discussing, and recording.  
+
+\paragraph{Assignments.} All assignments are submitted electronically by an online form. Please typeset or scan your work (e.g.~via phone).
+\begin{itemize}
+	\item \textbf{Short homework}: assigned every Tuesday, due on Thursday before the start of class. These are \emph{brief} exercises to review earlier material.
+	\item \textbf{Long homework}: assigned on Tuesday of odd-numbered weeks and due in two weeks. You will have a total of four assignments.
+	\item \textbf{Explainer video}:  assigned on Tuesday of odd-numbered weeks and due in two weeks. For each long homework, you will be semi-randomly assigned one problem to prepare a 5-minute video explaining the solution to your classmates. 
+	\item \textbf{Experiment explainer}: midway through the quarter you will prepare a 10-minute video explaining a plot that explains an experimental result in particle physics. 
+	\item \textbf{Peer review}: assigned on Thursday of odd-numbered weeks and due in one week. You will review some of your classmates explainer videos and provide feedback. You will also peer review each of your classmates' experiment explainer.
+\end{itemize}
+
+\paragraph{Grading.} There will be no final exam and we will not use the final exam slot.
+\begin{itemize}
+\item 10\% Short homework
+\item 25\% Long homework
+\item 30\% Explainer video
+\item 15\% Experiment explainer
+\item 10\% Peer review
+\item 10\% Peer review
+\end{itemize}
+Occasional extra credit opportunities may come up in class and in the assignments.
+
+\section{Learning Objectives}
+
+By the end of this course, you are expected to be able to do the the following learning outcomes:
+\begin{enumerate}
+	\item Given a set of Feynman rules: draw allowed Feynman diagrams, interpret their physical significance, and estimate their relative contribution to a probability amplitude.
+	\item Determine when a particle interaction (Feynman rule) is allowed or not allowed based on symmetry principles.
+	\item Determine when a scattering process is kinematically allowed based on special relativity.
+	\item Write down possible interactions between fields based on their group representations (as represented by indices) for special unitary groups.
+	\item Write and interpret the Lagrangian for the Standard Model.
+	\item Explain the mass spectrum of the Standard Model based on the Higgs mechanism and the gauge representations of the particles.
+	\item Connect the theoretical framework of this course to at least one experimental result (of the student's choice).
+\end{enumerate}
+
+% \noindent By the end of this course, students will be mathematically prepared for upper-division quantum mechanics and electrodynamics.
+
+
+
+% \section{Grading}
+
+
+
+
+\section{Syllabus/Agenda}
+
+The weekly agenda is as follows. 
+% The `work' for the week describes focus of the examples in class and homework assignments. 
+We reserve the right to adapt the topics and pacing as needed for our class. Please see the course webpage for the most updated information.
+
+\begin{enumerate}
+	\item Introduction to particles, special relativity
+	\item Quantum electrodynamics
+	\item Cross sections, QED processes
+	\item QED $+ \mu$, family symmetry, colliders
+	\item Weak interactions: symmetries and indexology
+	\item Electroweak interactions: the Higgs
+	\item Electroweak theory: spontaneous symmetry breaking
+	\item Quantum chromodynamics
+	\item Modern particle physics: experiments and questions
+	\item Open puzzles in particle physics
+\end{enumerate}
+
+
+
+
+\section{UC Riverside Policies}
+
+The information below is fairly standard and you may have already read much of it several times in different courses.\footnote{Much of the following text is adapted from templates from the \acro{UCR XCITE} team. Yes, this is a citation.} Please be aware of topics where this course differs from others, for example, academic integrity policies with respect to solutions sites. 
+
+\subsection{Course-specific norms}
+
+\paragraph{Titles.} We ask that you refer to the professor as \emph{Dr.~Tanedo} or \emph{Professor Tanedo}. The purpose of this norm is to encourage uniform honorifics and avoid gender-based and ethnicity-based stereotyping that can affect early career academics.
+
+\subsection{Academic Misconduct and Plagiarism}
+
+It is the \emph{responsibility of each student} to be familiar with the definitions, policies, and procedures concerning academic misconduct. Please revisit our Academic Integrity Policies and Procedures\footlink{conduct.ucr.edu/policies/academic-integrity-policies-and-procedures} for more information. This site also defines misconduct, provides examples of prohibited conduct, and explains the sanctions available for those found guilty of misconduct.
+
+Plagiarism is the appropriation of another person's ideas, processes, results, or words without giving appropriate credit. This includes the copying of language, structure, or ideas of another and attributing (explicitly or implicitly) the work to one's own efforts. Issues of significant academic integrity will be reported to the Student Conduct \& Academic Integrity Programs office\footlink{conduct.ucr.edu} for mediation. The \acro{SCAIP} office adjudicates these cases independently of the instructor.
+
+A rough guideline for \emph{this course} is:
+\begin{itemize}
+	\item You are \emph{encouraged} to work with other students. You should ask each other questions and learn from one another. Your submitted work should draw on your collaborations, but should be prepared by yourself independently.
+	\item You are \emph{encouraged} to use reputable outside resources. Anything that is not explicitly part of our course materials should be \emph{cited}. A citation contains enough information for any reader to access the same resource. Even after citing other work, your submitted work should be prepared by yourself independently.
+	\item You are \emph{welcome} to have others give you feedback on your independently prepared work and to incorporate that feedback into revisions of your work. All revisions should reflect your own independent work based on that feedback.
+	\item \emph{What about Chegg (and similar sites)?} The course materials contain several worked examples that are the best practice problems for our class. Given that we encourage outside research, we will \emph{not} restrict what resources you may use---however, we do discourage lazy use of solutions sites like Chegg. If you do use any external resources---whether Chegg, Wikipedia, other textbooks, or an academic journal---you are \emph{required} to cite those sources in your submitted assignment. 
+\end{itemize}
+For example: while researching a particular problem, you may find a part of the problem solved in a clever way on some solutions site. You are allowed to learn from this and think carefully for how it applies to the specific problem on your assignment. You should prepare your assignment \emph{without} the site in front of you, and in your solution you should provide a a citation to the webpage along the lines of: ``\emph{the technique to use a Fourier transform to integrate this distribution comes from Person McPersonson via \texttt{https://...}}'' You are responsible for the intellectual merit of anything you submit---so if your solution draws from a garbage source, you can expect a garbage grade.
+
+\paragraph{Motivation for this academic integrity policy.} Part of your training as an academic is to effectively use existing literature to solve new problems. 100 years ago `existing literature' meant printed material in a library. In modern times this includes everything accessible on the web. Rather than trying to artificially regulate permissible sources, we will strive for meaningful assessment and responsible engagement with the breadth of possible sources. Proper citation is not only honesty about sources of inspiration; it also highlights your individual contributions to your finished product. 
+%
+Ultimately, your submitted assignments are for your benefit. Careful citations to outside literature will make it easy for you to refer back to useful resources in the future. 
+
+\paragraph{Summary:} When in doubt about academic integrity in this course, you may contact the professor.
+
+
+\subsection{Academic Support Services}
+
+
+\paragraph{Undergraduates:} \UCR Academic Resource Center\footlink{arc.ucr.edu} offers peer-to-peer as well as staff supported mentoring and workshops. You may find it helpful to access their writing center\footlink{arc.ucr.edu/writing}. 
+
+\paragraph{Graduates:} refer to the \UCR Graduate Student Resource Center\footlink{gsrc.ucr.edu} and Graduate Writing Center\footlink{gwc.ucr.edu}.
+
+\paragraph{Student Needs:} The following \UCR resources are available to support students:
+\begin{itemize}
+	\item Student Health Services\footlink{studenthealth.ucr.edu}
+	\item Counseling \& Psychological Services\footlink{counseling.ucr.edu} (\acro{CAPS})
+	\item Residential Life and Dining: Basic Needs\footlink{basicneeds.ucr.edu}, including R’Pantry and Emergency Housing
+\end{itemize}
+
+
+
+\subsection{Equity and Access}
+
+\subsubsection{Reasonable Accommodation for Disabilities}
+Students with disabilities who require accommodations in this course must be registered with Student Disability Resource Center (\acro{SDRC}).\footlink{sdrc.ucr.edu} The \acro{SDRC} directly contacts the professor to handle all disability-related accommodations.
+%
+If you have a disability and you would like to make a request for reasonable accommodation, please contact the Student Disability Resource Center directly.
+
+
+\subsubsection{Adjustments for Pregnancy/Childbirth}
+
+Should you need modifications or adjustments to your course requirements because of documented pregnancy-related or childbirth-related issues, please contact the instructor. Generally, modifications will be made where medically necessary and similar in scope to accommodations based on temporary disability.  Learn more about the rights of pregnant and parenting students by consulting the Office of Diversity, Equity, and Inclusion.\footlink{diversity.ucr.edu}
+
+\subsubsection{Title IX Resources}
+
+For any concerns regarding gender-based discrimination, sexual harassment, sexual misconduct, stalking, or intimate partner violence, the University offers a variety of resources, including advocates on-call 24/7, counseling services, mutual no contact orders, scheduling adjustments, and disciplinary sanctions against the perpetrator. Please see the Title IX website\footlink{titleix.ucr.edu} for more information or to file a report. They can be reached at (951)827-7070. 
+
+Please note that faculty and staff at \UCR who receive information regarding sexual violence and sexual harassment are required to share that information with the Title IX office, for example by making their own report. If you are need a confidential source of support, please reach out to the \acro{ucr care} office.\footlink{care.ucr.edu}
+
+\subsubsection{Religious Absences}
+
+It is the policy of the University to excuse absences of students that result from religious observances and to provide for the rescheduling of examinations and additional required classwork that may fall on religious holidays without penalty. It is the responsibility of \emph{the student} to make alternate arrangements with the instructor at least one week prior to the actual date of the religious holiday.
+
+
+
+\subsection{Library And Technical Support}
+
+Access digital materials and other resources at the \UCR Library\footlink{library.ucr.edu}. It may be especially helpful to be able to connect to the campus network through the \UCR~\acro{VPN}\footlink{library.ucr.edu/using-the-library/technology-equipment/connect-from-off-campus}.
+
+\acro{ITS} Student Technology Services\footlink{its.ucr.edu/sts} supports 9 student computer labs, including 7 public labs and 2 nonpublic labs, with approximately 293 public lab hours per week available for academic use by all \UCR students. \UCR students can use the \acro{ITS STS} website to submit a ServiceLink ticket or may directly contact \texttt{BearHelp@ucr.edu}. They provide assistance with computer and specialized software access, R'Mail and Canvas accounts, network connectivity, or any other services used by \UCR students.
+
+\subsection{Recognition of reading the syllabus}
+
+In recognition of anyone who actually skimmed through the syllabus (it was a pain to write) and made it this far, please email the professor with the following subject title: ``[P165] Polar Bear Parade'' and attach your favorite photo of a polar bear being cute (for good practice, please include a citation to the source). Students who do this before Week 2 will receive a small extra credit on their course grade.
+
+\subsection{Registration and Withdrawal}
+
+If you choose to withdraw from this course, you must complete the appropriate forms from the Office of the Registrar.\footlink{registrar.ucr.edu/calendar}
+
+
+\end{document}
