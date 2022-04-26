@@ -1,0 +1,243 @@
+\documentclass[12pt]{article}
+%% arXiv paper template by Flip Tanedo
+%% last updated: Dec 2016
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  THE USUAL PACKAGES  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{nopageno}
+\usepackage{enumerate}
+\usepackage{parskip}
+\usepackage{bbm}
+
+\usepackage{sectsty}
+\sectionfont{\Large}
+% \subsectionfont{\large}
+% \renewcommand{\thesection}{}
+% \renewcommand{\thesubsection}{\arabic{subsection}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  PAGE FORMATTING and (RE)NEW COMMANDS  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[margin=2cm]{geometry}   % reasonable margins
+
+\graphicspath{{figures/}}	        % set directory for figures
+
+% for capitalized things
+\newcommand{\acro}[1]{\textsc{\MakeLowercase{#1}}}    
+
+\numberwithin{equation}{section}    % set equation numbering
+\renewcommand{\tilde}{\widetilde}   % tilde over characters
+\renewcommand{\vec}[1]{\mathbf{#1}} % vectors are boldface
+
+\newcommand{\dbar}{d\mkern-6mu\mathchar'26}    % for d/2pi
+\newcommand{\ket}[1]{\left|#1\right\rangle}    % <#1|
+\newcommand{\bra}[1]{\left\langle#1\right|}    % |#1>
+\newcommand{\Xmark}{\text{\sffamily X}}        % cross out
+
+\let\olditemize\itemize
+\renewcommand{\itemize}{
+  \olditemize
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}
+
+
+% Commands for temporary comments
+\newcommand{\comment}[2]{\textcolor{red}{[\textbf{#1} #2]}}
+\newcommand{\flip}[1]{{\color{red} [\textbf{Flip}: {#1}]}}
+\newcommand{\email}[1]{\texttt{\href{mailto:#1}{#1}}}
+
+\newenvironment{institutions}[1][2em]{\begin{list}{}{\setlength\leftmargin{#1}\setlength\rightmargin{#1}}\item[]}{\end{list}}
+
+
+\usepackage{fancyhdr}		% to put preprint number
+
+
+
+% Commands for listings package
+%\usepackage{listings}      % \begin{lstlisting}, for code
+%
+% \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
+%    sets style to small true-type
+
+
+
+%%%%%%%%%%%%%%%%%%%
+%%%  HYPERREF  %%%%
+%%%%%%%%%%%%%%%%%%%
+
+%% This package has to be at the end; can lead to conflicts
+\usepackage{microtype}
+\usepackage[
+	colorlinks=true,
+	citecolor=black,
+	linkcolor=black,
+	urlcolor=green!50!black,
+	hypertexnames=false]{hyperref}
+
+
+
+
+
+\begin{document}
+
+
+\begin{center}
+
+    {\Large \textsc{Short HW 5}:
+    \textbf{Invariants of SU(2)}}
+    
+\end{center}
+
+\vskip .4cm
+
+\noindent
+\begin{tabular*}{\textwidth}{rl}
+	\textsc{Course:}& Physics 165, \emph{Introduction to Particle Physics} (2022)
+	\\
+	\textsc{Instructor:}& Prof. Flip Tanedo (\email{flip.tanedo@ucr.edu})
+	\\
+	\textsc{Due by:}& \textbf{Thursday}, April 28
+\end{tabular*}
+
+The generalization of the idea of a `rotation' is called a Lie group\footnote{A group is how to mathematically describe symmetries. A Lie group, named after Sophius Lee and pronounced `\emph{lee},' is a symmetry with continuous parameters. For example, rotations are a Lie group because you can rotate by any angle $\theta \in [0,2\pi)$. In contrast, parity transformations (a parity transformation is the universe that you see through a mirror) are a discrete group.} 
+%
+Each element of a Lie group is a different symmetry transformation. 
+
+There are an infinite number of elements in a Lie group.
+%
+This is completely analogous to there being an infinite number ordinary rotations: you have a continuous parameter, $\theta$, for each axis of rotation. However, there are only a finite number of axes of rotation. You can generate a finite rotation about a given axis, $U(\theta)$, by exponetiating the infinitesimal rotation:
+\begin{align}
+	U(\theta) = e^{i\theta T} \ ,
+\end{align}
+where $T$ is called the \textbf{generator} of the continuous transformation. The factor of $i$ is conventional\footnote{Physicists put in the $i$ because they want their generators to be Hermitian, $T^\dag = T$. This is because Hermitian matrices correspond to physical observables: they have real eigenvalues and orthogonal eigenvectors. Mathematicians do not put in the $i$ because they don't mind that their generators are anti-Hermitian, $T^\dag = -T$.}. For example, you know that for ordinary rotations in 2-dimensional real space:
+\begin{align}
+	R(\theta) &=
+	\begin{pmatrix}
+		\cos\theta & \sin\theta\\
+		-\sin\theta & \cos \theta
+	\end{pmatrix}
+	= 
+	e^{i\theta T}
+	&
+	iT &= 
+	\begin{pmatrix}
+		0 & 1\\
+		-1 & 0
+	\end{pmatrix} \ .
+\end{align}
+You can confirm that $T$ is Hermitian. This is called SO(2), the group of special orthogonal $2\times 2$ matrices. Special means $\det U =1$, and orthogonal means $U^TU = \mathbbm{1}$. You also know that all rotations acting on $\mathbb{R}^2$ may be written in the form above. There is only one generator, $T$, even though there are an infinite number of finite transformations, $R(\theta)$. As you may expect, most of the properties of the group are encoded in the properties of the generator.
+
+In this problem we will explore two of the most important groups for particle physics: SU(2) and SU(3). 
+%
+SU($N$) is the \emph{special unitary group of degree 2}. It is the symmetry of $N\times N$ matrices that are unitary and have unit determinant:
+\begin{align}
+	U^\dag U &= \mathbbm{1} 
+	&
+	\det U &= 1 \ .
+\end{align}
+Unlike SO(2), these groups have more than one generator. This corresponds to the groups having more than one axis of rotation. As you know from 3D rotations, doing successive transformations along different axes \emph{does not commute}. This commutation relation is the defining relation of a Lie group. Define the \textbf{structure constants}, $f^{ABC}$ of a Lie group as follows. If $T^A$ and $T^B$ are two generators of the Lie group then their commutator is:
+\begin{align}
+	\left[T^A, T^B\right] = i f^{ABC}T^C \ .
+	\label{eq:commutator}
+\end{align}
+This is significant because it tells you that if you take the difference of two successive infinitesimal rotations, you produce an infinitesimal rotation in some other direction.\footnote{In other words: the value of \eqref{eq:commutator} is that the left-hand side has two generators, but the right-hand side only has one generator. However, this is `obvious' if you play with doing 3D rotations on sufficiently asymmetric objects like textbooks. If you're confused, ask about this in class.}
+
+In addition to the generators, and the structure constant, the symmetry group SU($N$) gives us an additional tensor that we can use to form invariants. It is the totally antisymmetric Levi--Civita tensor of order $N$, $\varepsilon^{a_1\cdots a_N}$, and its cousin with lower-indices, $\varepsilon_{a_1\cdots a_N}$. As discussed in class, these are $N$-component tensors with elements $1$, $-1$, or $0$. These are fixed by requiring one element to be 1, and the rest to be determined by the total antisymmetry with respect to the interchange of any two indices. 
+
+
+\section{SU(2)}
+
+\subsection{Invariants out of a doublet}
+
+The natural objects that SU(2) matrices act on are 2-component complex vectors that we call \textbf{spinors} or \textbf{doublets}.\footnote{Technically, the thing that we usually call a spinor is a representation of the Lorentz group. It turns out that these spinors have the same local properties as SU(2) doublets, so often times we use the phrases interchangeably. Mathematicians hate this. The spinor that we refer to here is simply a vector in a complex 2-dimensional vector space.} An example of a spinor is the \textbf{lepton doublet}, which we choose to have an upper index:
+\begin{align}
+	L^a &= \begin{pmatrix}
+		\nu \\ e
+	\end{pmatrix} 
+	&
+	(L^\dag)_a &= \begin{pmatrix}
+		\nu^\dag & e^\dag
+	\end{pmatrix} 
+	\ .
+\end{align}
+The Hermitian conjugate of the doublet $L^\dag$, has a lower index. It is a row vector. The $\dag$ on the component particles, $\nu^\dag$ and $e^\dag$, are  the charge-conjugated particles.\footnote{For now, you can think of the charge-conjugated particles as something like antiparticles. We will soon see that an antiparticle is the charge conjugate \emph{and} parity conjugate.} In a Feynman rule, when an index can be upper or lower: an upper index corresponds to an incoming arrow on that line, while a lower index corresponds to an outgoing arrow on that line.
+
+Write down the unique invariant that you can form out of one $L$ and one $L^\dag$ by contracting their indices. If you were to draw this as a Feynman rule, what would it look like? (It is a vertex with two lines.\footnote{There's a good reason why we never write Feynman rules with only two lines. This is because we do not have to do perturbation theory on such rules, we can completely solve the quadratic part of the Lagrangian. If this is curious, you can ask in class.})
+
+\textsc{Comment:} for each group SU($N$), you can have generalizations of the doublet $L$ and anti-doublet $L^\dag$. Rather than calling these $N$-plets, we simply call them the \textbf{fundamental} and $\textbf{antifundamental}$ representations.
+
+\subsection{Raising and Lowering Indices}
+
+SU(2) gifts us with the 2-index Levi--Civita tensors, $\varepsilon^{ab}$ and $\varepsilon_{ab}$. These can be used like metrics to raise and lower indices. Using the Levi--Civita tensor, write down the unique invariant that you can form out of two doublets, $L$, by contracting all the indices. Write out each term in the invariant; that is, write out the invariant with respect to $\nu$ and $e$. If you were to draw this as a pair of Feynman rules, what would it look like? Be sure to label arrows and write separate rules according to the components $\nu$ and $e$ involved in each rule.
+
+\subsection{The structure constant}
+
+The generators of SU(2) are $T^a = \frac{1}{2}\sigma^A$, where the $\sigma^A$ are the Pauli matrices:
+\begin{align}
+	\sigma^1 &= 
+	\begin{pmatrix}
+		0 & 1\\
+		1 &0
+	\end{pmatrix}
+	&
+	\sigma^2 &= 
+	\begin{pmatrix}
+		0 & -i\\
+		i &0
+	\end{pmatrix}
+	&
+	\sigma^3 &= 
+	\begin{pmatrix}
+		1 & 0\\
+		0 & -1
+	\end{pmatrix} \ .
+\end{align}
+Check by explicit calculation that $f^{123} = 1$. In general, the structure constant of SU(2) is $f^{ABC} = \varepsilon^{ABC}$. 
+
+\subsection{The triplet representation}
+
+We have been very deliberate to use different kinds of indices to refer to different kinds of transformations. The doublet and anti-doublet have lower Roman letters from the beginning of the alphabet, $a,b,c$. The generators of SU(2) have capital Roman letters from the beginning of the alphabet $A,B,C$. The group SU(2) is defined largely by the commutation relations of the generators\footnote{The commutation relations are the local properties of the group, meaning the properties near the identity matrix $U=\mathbbm{1}_{N\times N}$. Sometimes the global property of the group matters, for example when showing that rotating a spinor by $2\pi$ picks up an overall minus sign. This minus sign comes from the factors of $1/2$ on the Pauli matrices in the definition of $T^A$. Those factors, in turn, were necessary to normalize the generators.}. 
+
+There are other objects of different dimensionality that can transform according to SU(2). This is the so-called \textbf{triplet representation}. More generally in SU($N$), this is called the \textbf{adjoint representation}. The adjoint representation transforms an $N$-dimensional \emph{real} vector space whose indices are the $A,B,C$ indices of the generators, say $W^A$. 
+
+A convenient way to think about the adjoint representation is to convert the one adjoint index into a fundamental--antifundamental pair of indices. The way we do this is by using the generators themselves, $(T^A)^a_{\phantom{a}b}$, as \emph{conversion factors} between indices.\footnote{This is completely analogous to `multiplying by one' when doing dimensional analysis!} Thus if you have an SU(2) adjoint particle $W^A$, you can write it in terms of a fundamental and antifundamental index as:
+\begin{align}
+ 	W^A = W^a_{\phantom{a}b} = W^A (T^A)^a_{\phantom{a}b} \ .
+ \end{align}
+ Note that because the adjoint indices are real, we do not distinguish between upper and lower indices. Any repeated pair of upper adjoint indices is summed over. 
+
+ Using this, write down the unique invariant that you can write with a doublet $L$, and antidoublet $L^\dag$, and an adjoint $W^A$. You, of course, already know this as the Feynman rule for weak theory. 
+
+ \subsection{Three gauge bosons}
+
+ The generators of SU(2) are a set of linearly-independent Hermitian, traceless, $2\times 2$ matrices\footnote{This means the generators are a basis in a complex vector space of traceless Hermitian matrices. A `vector' in this space is a $2\times 2$ Hermitian, traceless matrix formed by taking linear combinations of the generators with complex coefficients.}. Based on this, argue why there are \emph{three} particles $W^A$ as opposed to, say, four. 
+
+\textsc{Comment:} If I wrote $W^a_{\phantom{a}b}$, you might think that because the indices $a$ and $b$ can each take two values, there should be $2\times 2 = 4$ possible $W$ bosons. 
+
+\subsection{The triple-gauge boson rule}
+
+We may use the SU(2) structure constant $f^{ABC} = \varepsilon^{ABC}$ to form invariants with respect to the adjoint representation. Draw the Feynman rule for three $W^A$ particles interacting with one another? Write out the explicit indices. For example, can you have a $W^1W^1W^2$ vertex?
+
+\subsection{Triple antidoublet rule?}
+
+Why are you not allowed to use the structure constant $f^{ABC}$ to form an analogous three antidoublet Feynman rule? Say, $\varepsilon^{123}L^\dag_1L^\dag_2L^\dag_3$?
+
+
+
+% invariant tensors
+% triplet representation
+
+
+\end{document}
