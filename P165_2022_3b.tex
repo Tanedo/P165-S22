@@ -143,6 +143,45 @@ In this problem we will use this expression to determine the phase space for a p
 \end{align}
 Here $p_1$ and $p_2$ are the four-momenta of the two final state particles of masses $m_1$ and $m_2$.
 
+\begin{framed}
+\flip{Additional information added 4/27}. There is some confusion about the notation in this problem. Here are a few notes. The notation $d^3\vec{x}$ is a volume integral over all of space. It is shorthand for
+\begin{align}
+	d^3\vec{x} \equiv dx\,dy\,dz \ .
+\end{align}
+You can also write the integral over all of spacetime as follows:
+\begin{align}
+	d^4x \equiv dt\,dx\,dy\,dz \ .
+\end{align}
+In particle physics, we usually work in momentum space: that is, we do a Fourier transform so that we're working with states of well defined energy and momentum rather than well defined spacetime position---remember that the uncertainty principle tells us we have to pick one or the other. There are annoying factors of $(2\pi)$ that come along with the definition of the Fourier transform. I will use the slash notation to simplify this: $\dbar p = dp/(2\pi)$. You may remember this from $\hbar =h/(2\pi)$. In the standard conventions for particle physics, the integral over all 3-momenta is
+\begin{align}
+	\dbar^3\vec{p} \equiv \frac{dp_x \,dp_y\,dp_z}{(2\pi)^3} \ .
+\end{align}
+The integral over the full 4-momentum is
+\begin{align}
+	\dbar^4{p} \equiv \frac{dE\,dp_x \,dp_y\,dp_z}{(2\pi)^4} \ .
+\end{align}
+The Dirac $\delta$-function is the slayer of integrals. It is defined as follows:
+\begin{align}
+	\int dx\, \delta(x-a) f(x) = f(a) \ .
+\end{align}
+We will also define the 4-dimensional $\delta$-function to impose total 4-momentum conservation:
+\begin{align}
+	(2\pi)^4
+	\delta^{(4)}(p_\text{in}-p_\text{out}) \equiv
+	(2\pi)^4
+	\delta(p_\text{in}^0-p_\text{out}^0)\,
+	\delta(p_\text{in}^1-p_\text{out}^1)\,
+	\delta(p_\text{in}^2-p_\text{out}^2)\,
+	\delta(p_\text{in}^3-p_\text{out}^3)\, .
+\end{align}
+Because of our Fourier transform conventions, the $\delta$-functions also come with factors of $(2\pi)$. For example, this means that
+\begin{align}
+	\int \dbar^4 p_\text{out}\; f(p_\text{out}^2)\, (2\pi)^4 \delta^{(4)}(p_\text{in}-p_\text{out})
+	= f(p_\text{in}^2) \ .
+\end{align}
+
+\end{framed}
+
 \subsubsection{Integration over on-shell conditions}
 
 Perform the integration over the two on-shell conditions with respect to the energies of the final state momenta, $dp_1^0$ and $dp_2^0$.  You should end up with
