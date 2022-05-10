@@ -1,0 +1,211 @@
+\documentclass[12pt]{article}
+%% arXiv paper template by Flip Tanedo
+%% last updated: Dec 2016
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  THE USUAL PACKAGES  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{nopageno}
+\usepackage{enumerate}
+\usepackage{parskip}
+\usepackage{bbm}
+
+\usepackage{sectsty}
+\sectionfont{\Large}
+% \subsectionfont{\large}
+% \renewcommand{\thesection}{}
+% \renewcommand{\thesubsection}{\arabic{subsection}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  PAGE FORMATTING and (RE)NEW COMMANDS  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[margin=2cm]{geometry}   % reasonable margins
+
+\graphicspath{{figures/}}	        % set directory for figures
+
+% for capitalized things
+\newcommand{\acro}[1]{\textsc{\MakeLowercase{#1}}}    
+
+\numberwithin{equation}{section}    % set equation numbering
+\renewcommand{\tilde}{\widetilde}   % tilde over characters
+\renewcommand{\vec}[1]{\mathbf{#1}} % vectors are boldface
+
+\newcommand{\dbar}{d\mkern-6mu\mathchar'26}    % for d/2pi
+\newcommand{\ket}[1]{\left|#1\right\rangle}    % <#1|
+\newcommand{\bra}[1]{\left\langle#1\right|}    % |#1>
+\newcommand{\Xmark}{\text{\sffamily X}}        % cross out
+
+\let\olditemize\itemize
+\renewcommand{\itemize}{
+  \olditemize
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}
+
+
+% Commands for temporary comments
+\newcommand{\comment}[2]{\textcolor{red}{[\textbf{#1} #2]}}
+\newcommand{\flip}[1]{{\color{red} [\textbf{Flip}: {#1}]}}
+\newcommand{\email}[1]{\texttt{\href{mailto:#1}{#1}}}
+
+\newenvironment{institutions}[1][2em]{\begin{list}{}{\setlength\leftmargin{#1}\setlength\rightmargin{#1}}\item[]}{\end{list}}
+
+
+\usepackage{fancyhdr}		% to put preprint number
+
+
+
+% Commands for listings package
+%\usepackage{listings}      % \begin{lstlisting}, for code
+%
+% \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
+%    sets style to small true-type
+
+
+
+%%%%%%%%%%%%%%%%%%%
+%%%  HYPERREF  %%%%
+%%%%%%%%%%%%%%%%%%%
+
+%% This package has to be at the end; can lead to conflicts
+\usepackage{microtype}
+\usepackage[
+	colorlinks=true,
+	citecolor=black,
+	linkcolor=black,
+	urlcolor=green!50!black,
+	hypertexnames=false]{hyperref}
+
+
+
+
+
+\begin{document}
+
+
+\begin{center}
+
+    {\Large \textsc{Short HW 7}:
+    \textbf{Mass terms and equations of motion}}
+    
+\end{center}
+
+\vskip .4cm
+
+\noindent
+\begin{tabular*}{\textwidth}{rl}
+	\textsc{Course:}& Physics 165, \emph{Introduction to Particle Physics} (2022)
+	\\
+	\textsc{Instructor:}& Prof. Flip Tanedo (\email{flip.tanedo@ucr.edu})
+	\\
+	\textsc{Due by:}& \textbf{Thursday}, May 10
+\end{tabular*}
+
+This short homework motivates why invariants between two particles (and no derivatives) should be understood as mass terms. The discussion is necessarily qualitative.\footnote{For details, see~\url{https://github.com/fliptanedo/Math-Methods-Notes/blob/master/P231_notes.pdf}}
+
+\section{Equation of motion from matrix multiplication}
+
+Let $\vec{q} = (q_1, \cdots, q_N)^T$ be an $N$-dimensional vector in Euclidean space. Given a matrix $A$ in this space, one can write an invariant under $N$-dimensional rotations,
+\begin{align}
+	L= 
+	\frac{1}{2}\vec{x}^T A \vec{x}
+	= x_i A^i_{\phantom i j} x^j
+	= \sum_{i,j} \frac{1}{2} x_i A_{ij} x_j \ .
+\end{align}
+The factor of $1/2$ is for convenience. In the last step we have used the fact that the Euclidean metric is $\delta_{ij}$ so that we may write all indices lower.\footnote{We deal with upper and lower indices when the distinction makes life easier. In this case, putting all indices lower makes life easier.}
+
+Each variable $x_i$ is an independent component. The \emph{variation} of $L$ with respect to $x_i$ is
+\begin{align}
+	\frac{\delta}{\delta q_i} L = % \frac{1}{2}\vec{x}^T A \vec{x} = 
+	\frac{\partial}{\partial q_i} L % \frac{1}{2}\vec{x}^T A \vec{x} 
+	\ .
+\end{align}
+Assuming that $A$ is a symmetric matrix, $A_{ij} = A_{ji}$, show that the variation $\delta L/\delta x_i$ is
+\begin{align}
+	\frac{\delta L}{\delta q_i} = (A \vec{q})_i 
+\end{align}
+
+\section*{Intermission: Discussion}
+
+The equation of motion for a particle (field) comes from a variational principle. We maintain that the action, $S=\int dt\, L$ is stationary with respect to variations of the dynamical variables. If $L$ takes the form above and the $x_i$ are the dynamical variables, one ends up with equations of motion of the form
+\begin{align}
+	\frac{\delta L}{\delta q_i} = A\vec{q} = 0  .
+\end{align}
+Physical interpretation is that we should think of $\vec{q}$ as a field, $\phi$. The individual components $q_i$ correspond to values of the field at specific points in spacetime, $\phi(x)$. The matrix $A$ is generally a differential operator. For a field like $\phi(x)$ with no indices, the differential operator takes a generic form
+\begin{align}
+	A = \partial^2 + m^2 \ .
+\end{align}
+
+
+\section{On-shell conditions for a scalar field}
+
+Let $\phi(x)$ be a scalar field. From the analogy to matrix multiplication, one form of the action is 
+\begin{align}
+	 S = \int dt\, d^3x \, \mathcal L = \int d^4x \, \frac{1}{2}\phi(x) \left(\partial^2 + m^2\right) \phi(x) \ .
+\end{align}
+The integral over $d^3x$ is the analog of the sum over $i,j$ in the matrix multiplication example.\footnote{If you are observant, you may worry why there is only one integral rather than two. Excellent! The reason is that the `matrix' $\partial^2 - m^2$ is diagonal. Feel free to ask about this in class.} Clearly we see that this `invariant' corresponds to connecting two $\phi$ particles. We could write this as a vertex, but it turns out that the terms that are quadratic in fields can be solved exactly because the equation of motion, $(\partial^2 - m^2)\phi(x) = 0$ is linear.
+
+Write $\phi(x)$ in a Fourier representation:
+\begin{align}
+	\phi(x) = \int \dbar^3p \, e^{-ip\cdot x} \tilde \phi(p) \ .
+\end{align}
+In one quick line, show that the analog of $A\vec{x} = 0$ is
+\begin{align}
+	-(p^2 - m^2)\tilde\phi(p) = 0 \ .
+\end{align}
+\textsc{Discussion}: this tells us that the classical equation of motion imposes $p^2 = m^2$ for each Fourier mode of the field $\phi(x)$. This looks really familiar if we interpret $m$ to be the mass of the particle: the classical equation of motion imposes that the particle is \emph{on-shell}. In this way, we see that the $m^2 \phi^2$ term controls the mass of the field $\phi$.
+
+
+
+\section*{Intermission: Discussion}
+
+So far we've taught ourselves to treat Lagrangian terms as rules for vertices. This is part of the idea that the Feynman rules are a Taylor expansion (perturbation expansion). It turns out that the terms in the Lagrangian that are quadratic in a field can be solved exactly. Thus we do not need Feynman rules with only two external lines. 
+
+Here's a sketch of what the exact solution looks like. It helps to insert a linear term, $J\phi$ into the Lagrangian. $J$ is called the \emph{source} of the field. It tells us that there's something causing excitations of this particle. The equation of motion ends up being (please forgive me for dropping all sorts of prefactors)
+\begin{align}
+	\left(\partial^2 + m^2\right) \phi(x) = J(x) \ .
+\end{align}
+We can then go to a Fourier basis for $\phi(x)$. The source is usually a $\delta$-function, $J(x)=\delta^{(4)}(x)$, representing a specific moment in spacetime where a $\phi$ particle is created. Recalling the Fourier expansion of the $\delta$-function, the equation of motion for a given Fourier mode is
+\begin{align}
+	(p^2 - m^2) \tilde\phi(p) = i \ ,
+\end{align}
+where I have probably made several sign mistakes. Poetically, the solution to this equation is:
+\begin{align}
+	\tilde \phi(p) = \frac{i}{p^2 - m^2} \ ,
+\end{align}
+which is exactly the propagator: the rule we used internal lines. We have skimmed over a \emph{lot} here. For those interested in the nuts and bolts of how this actually works, this is called a Green's function. We go over Green's functions in gory detail in Physics 231. 
+
+\section{Possible mass terms for a fermion}
+
+Fermion mass terms are funny. Recall that a left-chiral fermion $\psi^\alpha$ has one type of index, but its conjugate $(\psi^\dag)_{\dot\alpha}$ has a different kind of index. Thus you can form invariants that look like $\psi^{\alpha}\psi^\beta\varepsilon_{\alpha\beta}$, but not $\psi^\dag \psi$.
+
+\subsection{Charged fermions want to be massless}
+
+Argue that any fermion $\psi$ with charge (e.g. indices, or even hypercharge) cannot have a mass term with itself. There is no invariant under all the symmetries---spin, SU(3), SU(2), U(1)---that connects two of the particle: either $\psi \psi$ or $\psi^\dag\psi$.  
+
+\subsection{Majorana mass terms}
+
+Argue, on the other hand, that as long as a fermion $\psi$ has \emph{no} charge, it may have a mass term. Write out the invariant. We call this a Majorana mass. 
+
+
+
+
+
+
+
+ 
+
+
+
+
+\end{document}
