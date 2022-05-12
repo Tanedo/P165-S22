@@ -1,0 +1,339 @@
+\documentclass[12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  THE USUAL PACKAGES  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{nopageno}
+\usepackage{enumerate}
+\usepackage{parskip}
+\usepackage{framed}
+\usepackage{bbm}
+
+\usepackage{sectsty}
+\sectionfont{\Large}
+% \renewcommand{\thesection}{}
+% \renewcommand{\thesubsection}{\arabic{subsection}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  PAGE FORMATTING and (RE)NEW COMMANDS  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[margin=2cm]{geometry}   % reasonable margins
+
+\graphicspath{{figures/}}	        % set directory for figures
+
+% for capitalized things
+\newcommand{\acro}[1]{\textsc{\MakeLowercase{#1}}}    
+
+\numberwithin{equation}{section}    % set equation numbering
+\renewcommand{\tilde}{\widetilde}   % tilde over characters
+\renewcommand{\vec}[1]{\mathbf{#1}} % vectors are boldface
+
+% \newcommand{\dbar}{d\mkern-6mu\mathchar'26}    % for d/2pi
+\newcommand{\dbar}{d\mkern-6mu\mathchar'26\hspace{-.1em}}    % spacing
+\newcommand{\ket}[1]{\left|#1\right\rangle}    % <#1|
+\newcommand{\bra}[1]{\left\langle#1\right|}    % |#1>
+\newcommand{\Xmark}{\text{\sffamily X}}        % cross out
+
+\let\olditemize\itemize
+\renewcommand{\itemize}{
+  \olditemize
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}
+
+
+% Commands for temporary comments
+\newcommand{\comment}[2]{\textcolor{red}{[\textbf{#1} #2]}}
+\newcommand{\flip}[1]{{\color{red} [\textbf{Flip}: {#1}]}}
+\newcommand{\email}[1]{\texttt{\href{mailto:#1}{#1}}}
+
+\newenvironment{institutions}[1][2em]{\begin{list}{}{\setlength\leftmargin{#1}\setlength\rightmargin{#1}}\item[]}{\end{list}}
+
+
+\usepackage{fancyhdr}		% to put preprint number
+
+
+
+% Commands for listings package
+%\usepackage{listings}      % \begin{lstlisting}, for code
+%
+% \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
+%    sets style to small true-type
+
+
+
+%%%%%%%%%%%%%%%%%%%
+%%%  HYPERREF  %%%%
+%%%%%%%%%%%%%%%%%%%
+
+%% This package has to be at the end; can lead to conflicts
+\usepackage{microtype}
+\usepackage[
+	colorlinks=true,
+	citecolor=black,
+	linkcolor=black,
+	urlcolor=green!50!black,
+	hypertexnames=false]{hyperref}
+
+
+
+
+
+\begin{document}
+
+
+\begin{center}
+
+    {\Large \textsc{Long HW 4}:
+    \textbf{Breaking Electroweak Symmetry}}
+    
+\end{center}
+
+\vskip .4cm
+
+\noindent
+\begin{tabular*}{\textwidth}{rl}
+	\textsc{Course:}& Physics 165, \emph{Introduction to Particle Physics} (2022)
+	\\
+	\textsc{Instructor:}& Prof. Flip Tanedo (\email{flip.tanedo@ucr.edu})
+	\\
+	\textsc{Due by:}& {Thursday}, May 26
+\end{tabular*}
+
+\noindent
+This is the main 2-week homework set. Unless otherwise stated, give all responses in natural units where $c = \hbar = 1$ and energy is measured in electron volts (usually MeV or GeV). 
+
+
+The Higgs field is $H^a(x)$. It is a two-component function over spacetime that transforms with respect to \acro{SU(2)} and \acro{U(1)}:
+\begin{align}
+	H &\to e^{i\theta^A T^A} H
+	&
+	H &\to e^{i(1/2)\theta_Y} H \ ,
+\end{align}
+where $\theta^A$ are the amounts of rotation with respect to the three \acro{SU(2)} axes and $\theta_Y$ is amount of hypercharge rephasing. The factor of $(1/2)$ is the hypercharge of $H$. 
+
+
+The phenomenon of \emph{electroweak symmetry breaking} boils down to the statement that the Higgs picks up a \textbf{vacuum expectation value} (``vev'') that we denote $\langle H^a \rangle$. What is special about the vev is that it is frozen in: it does \emph{not} transform. Under transformations by \acro{SU(2)} and \acro{U(1)}, the vev $\langle H \rangle$ does \emph{nothing}. We can choose to align this vev in the following direction:
+\begin{align}
+	\langle H^a \rangle = \begin{pmatrix}
+		0\\
+		v/\sqrt{2}
+	\end{pmatrix} \ .
+\end{align}
+Where $v=246$~GeV and the $\sqrt{2}$ is a convention. 
+
+
+To see the effect of this vev you take \emph{all} the terms in the theory and replace the Higgs with its vev. Because the vev does not transform, those terms where we made the replacement are \emph{no longer invariant}. We have \emph{broken} electroweak symmetry. Anywhere you can put the Higgs, you can put the Higgs vev as an \textbf{order parameter} for electroweak symmetry breaking. The vev is like a non-invariant tensor that we get to use as a free `index contractor.'
+
+\section{Fermion masses}
+
+In class we wrote out the three Yukawa couplings of the Standard Model:
+\begin{align}
+	\mathcal L \supset  &
+	\phantom{+}
+	y_e \left(L^\dag\right)_{\dot{\alpha}a} H^a \left(e_R\right)_{\dot{\beta}}\varepsilon^{\dot{\alpha}\dot{\beta}}
+	+ \text{h.c.}\\
+	& +
+	y_d \left(Q^\dag\right)_{\dot{\alpha}ma} H^a \left(d_R\right)_{\dot{\beta}}^m\varepsilon^{\dot{\alpha}\dot{\beta}}
+	+ \text{h.c.}\\
+	& +
+	y_u \left(Q^\dag\right)_{\dot{\alpha}ma} \left(H^\dag\right)_b \varepsilon^{ab} \left(u_R\right)_{\dot{\beta}}^m\varepsilon^{\dot{\alpha}\dot{\beta}}
+	+ \text{h.c.}
+\end{align}
+The numbers $y_e$, $y_d$, and $y_u$ are called the Yukawa couplings. They're just numbers that characterize the strength of the interaction. They are analogous to the electric coupling $e$ in the fine structure constant, $\alpha = e^2/4\pi = 1/137$. The ``$+$ h.c.'' means Hermitian conjugate. For example, 
+\begin{align}
+	\left[y_e \left(L^\dag\right)_{\dot{\alpha}a} H^a \left(e_R\right)_{\dot{\beta}}\varepsilon^{\dot{\alpha}\dot{\beta}}\right]^\dag
+	=
+	y_e^* L^{\alpha a} \left(H^\dag\right)_a \left(e_R^\dag\right)^{{\beta}}\varepsilon_{{\alpha}{\beta}} \ .
+\end{align}
+The $+$ h.c.\ term simply gives the interaction where all particles are replaced by their anti-particles. 
+
+Observe that all of these terms contain two fermions and a Higgs. That means when we swap the Higgs with the Higgs vev, the terms only contain a pair of fermions and no derivative. The rule in class was that any Lagrangian term with two particles and no derivative is a mass. Let's figure out what these masses look like.
+
+\subsection{Mass terms from the Higgs vev}
+
+Identify which of the left-chiral and right-chiral fermions pair up to become massive and write out the value of the mass. 
+
+\textsc{Example}: when we insert $\langle H\rangle = (0, v/\sqrt{2})^T$ into the electron Yukawa, one finds
+\begin{align}
+	y_e\frac{v}{\sqrt{2}} e_L^\alpha \left(e_R^\dag \right)^\beta \varepsilon_{\alpha\beta} + \text{h.c.} \ .
+\end{align}
+This means that the left-chiral electron $e_L$ and the right-chiral electron $e_R$ pair up and have a mass $m_e = y_e v/\sqrt{2}$. We say that `the electron' is a massive particle that is a mixture of both the left-chiral and right-chiral electrons. In other words: the physical electron is a massive fermion with four degrees of freedom. We call this type of mass a Dirac mass, and we call the resulting particle a Dirac fermion. This is in contrast to massless fermions that are chiral and have only two degrees of freedom. 
+
+\subsection{Numbers}
+
+Given that $m_u \approx 2~$MeV, $m_d\approx 5$~MeV, and $e\approx 0.5$~MeV: find the values of $y_e$, $y_d$, and $y_u$. Which of these three particles has the largest Yukawa interaction with the Higgs?
+
+
+\section{The right-handed neutrino}
+
+\subsection{A proposed neutrino Yukawa}
+
+Inspired by the previous problem and the fact that neutrinos have mass, we may want to introduce a right-handed neutrino, $\nu_R$, to our theory. This would have a Yukawa coupling analogous to the up-type Yukawa:
+\begin{align}
+	y_N  \left(L^\dag\right)_{\dot{\alpha}a} \left(H^\dag\right)_b \varepsilon^{ab} \left(\nu_R\right)_{\dot{\beta}}\varepsilon^{\dot{\alpha}\dot{\beta}}
+	+ \text{h.c.}
+\end{align}
+What are the quantum numbers of the right-handed neutrino, $\nu_R$, in order for this term to be allowed? Specifically, what is the hypercharge? (\textsc{Answer}: zero. Confirm this.)
+
+\textsc{Discussion:} We now know that neutrinos have mass. Introducing a right-handed neutrino is one way to tweak the theory to incorporate this mass. You may wonder: why don't we just update the Standard Model with a right-handed neutrino like this? The answer is that there is another way to add neutrino masses. 
+
+\subsection{Majorana mass for the right-handed neutrino}
+
+In class we noted that a chiral fermion, say a left-handed fermion $\psi$, can pick up a mass of the form $\psi^\alpha\psi^\beta\varepsilon_{\alpha\beta}$. This \emph{only} works if $\psi\psi$ is gauge invariant: that means that $\psi$ has no gauge indices, nor any \acro{U(1)} charges. A mass term of the form $M\psi^\alpha\psi^\beta\varepsilon_{\alpha\beta}$ is called a Majorana mass. Observe that this type of mass connects the particle to itself and only contains `half' the number of fermions as a Dirac fermion. We call this particle a Majorana fermion.
+
+It turns out that one can write a Majorana mass for the $\nu_L$ component of the lepton doublet, $L^a$. Write out the Lagrangian term that could give this.
+
+\textsc{Hint}: This cannot come from a Yukawa coupling (why?). We know that such a mass term has two powers of the left-handed neutrino; since $\nu_L$ lives inside of $L$, this means that it comes with two powers of $L$. We know that it cannot have any other powers of additional particles, but that there are leftover indices that need to be contracted: the only tool that we have is the Higgs vev, $\langle H \rangle$. Show that you can create a mass term using $L$ and $\langle H \rangle$: explicitly write out all indices and check charge conservation when $\langle H \rangle$ is replaced by $H$. Make sure you check hypercharge. Do the matrix multiplication in SU(2) space to show that you only pick up a mass for the $\nu_L$, and not the $e_L$. 
+
+\textsc{Fun fact}: this operator is called the Weinberg operator.
+
+
+
+\section{Electrodynamics from the electroweak force}
+
+The Higgs vev $\langle H \rangle$ is the order parameter of electroweak symmetry breaking. The symmetry breaking means that some of the gauge symmetries that we stated with are no longer valid. 
+
+\subsection{Transforming the vev}
+
+Write out the Higgs vev explicitly as a two-component vector. The vev does \emph{not} transform. However, we could imagine how it \emph{would} transform if it could.\footnote{That is: we know how $H^a$ transforms. But $\langle H^a\rangle$ is frozen and does not transform.} How \emph{would} $\langle H^a\rangle$ transform under a hypercharge rephasing by angle $\theta_Y$? How \emph{would} it transform under a weak transformation with respect to the third axis by angle $\theta^3$? Recall that the weak transformation on a doublet is
+\begin{align}
+	\begin{pmatrix}
+	a\\
+	b
+	\end{pmatrix}
+	\to 
+	\exp\left(\frac{1}{2}\theta^A \sigma^A\right)
+	\begin{pmatrix}
+	a\\
+	b
+	\end{pmatrix} \ .
+\end{align}
+
+\subsection{A leftover U(1)}
+
+The Higgs vev is invariant under a combination of \acro{U(1)} hypercharge and \acro{SU(2)} rotations about the third axis. What combination is this? (Explain why.)
+
+\textsc{Answer}: The Higgs vev is invariant under a combined rotation where $\theta_Y = \theta^3$.
+
+This leftover \acro{U(1)} symmetry is electromagnetism. The point is that even though $\langle H \rangle$ is not invariant under \acro{SU(2)}$\times$\acro{U(1)}, there is a combination of transformations that does not change $H$ anyway. That means that any Lagrangian terms that include $H$ are not invariant under \acro{SU(2)}$\times$\acro{U(1)}, but they \emph{are} invariant under electromagnetism.
+
+\subsection{Electric charges of matter}
+
+Determine the \emph{electric charge} of each fermion particle. This requires treating the components of the weak doublets separately: $u_L$ and $d_L$, $\nu_L$ and $e_L$. You know the correct answers, but show how this is related to the `leftover U(1)' above. Until we broke electroweak symmetry, we had no way of telling the components of the \acro{SU(2)} doublets apart from one another. Now we do: they have different electric charges.
+
+\section{Protons}
+
+A proton is a particle with a spin-1/2 index and net electric charge +1. Show how three quarks can be combined to give an object with these quantum numbers and no net color charge. Use the SU(3) invariant tensor. 
+
+\section{Flavor symmetry}
+
+Guess what! There's another type of index: flavor. This is the symmetry that relates electrons, muons, and taus / up, charm, and top / down, strange, and bottom. Flavor is a \emph{global} symmetry---so unlike gauge symmetries, it does \emph{not} introduce a new force particle. Like electroweak symmetry, flavor symmetry is broken. In the same way that electroweak symmetry breaking gives us a way to distinguish the components of a doublet (e.g.\ neutrinos and electrons), flavor symmetry breaking gives us a way to distinguish between the electrons, muons, and taus. 
+
+Each of the `QudLe' particles has a \acro{U(3)} global symmetry. This means that the flavor symmetry group is \acro{U(3)}$^5$. Recall that as far as we're concerned, \acro{U(3)} $=$ \acro{SU(3)}$\times$\acro{U(1)}. The transformations under each of these flavor symmetries is as follows: 
+\begin{align}
+	Q^i&\to \left(U_Q\right)^i_{\phantom{i}j} Q^j
+	&
+	u_R^i&\to \left(U_u\right)^i_{\phantom{i}j} u^j
+	&
+	d_R^i&\to \left(U_d\right)^i_{\phantom{i}j} d^j
+	&
+	L^i&\to \left(U_L\right)^i_{\phantom{i}j} L^j
+	&
+	e_R&\to \left(U_e\right)^i_{\phantom{i}j} e_r^j \ .
+\end{align}
+We have suppressed all other indices for clarity. Each of the $U_X$ are independent unitary matrices. Because we've run out of alphabets, we will use $i,j$ indices for each type of fermion, but we cannot contract these indices with each other. For example, we cannot contract $Q^i (d_R^\dag)_i$ because the $Q$ index is $i_Q$ (``belongs to quark doublets''), the $d_R$ index is $i_d$ (``belongs to right-handed down quark'').
+
+If flavor symmetry were respected, then there's no way to write down the Yukawa interactions. It turns out that the Yukawa couplings themselves are the order parameters for flavor symmetry breaking. We can think about them as vevs of some imaginary particle\footnote{Particle physicists call these `spurions' because we like silly names.}. 
+
+Writing out the flavor indices explicitly on the Yukawa terms gives:
+\begin{align}
+	\mathcal L \supset  &
+	\phantom{+}
+	(y_e)^i_{\phantom{i}j} L^\dag_i H e_R^j
+	+
+	(y_d)^i_{\phantom{i}j} Q^\dag_i H d_R^j
+	+
+	(y_u)^i_{\phantom{i}j} Q^\dag_i H^\dag u_R^j
+	+ \text{h.c.} \ ,
+\end{align}
+where we have suppressed all other indices. The Yukawa couplings have now been promoted to complex $3\times 3$ matrices. Each component of the matrix corresponds to a Yukawa coupling between one type of doublet and one type of right-handed fermion.
+
+\subsection{General flavor transformation}
+
+The Yukawa matrices are constants: they have indices, but they do not transform. Only the `cuddlies' transform under a flavor transformation. Under the general flavor transformation \eqref{eq:flavor:transform}, write down how each term in \eqref{eq:yukawas} transforms.
+
+\subsection{Too many masses}
+
+The general set of Yukawa matrices induce all sorts of masses. For example, each flavor of left-handed up-type quark $(u_L)^I$ is glued to each flavor of right-handed up-type quark, $\bar u_J$ through $(y_u)^J_{\phantom{J I}}$. 
+
+However each flavor of `cuddly' particle has identical charges and indices. The only thing that distinguishes them are the Yukawa couplings. We can thus use the general flavor transformation from the previous section to \emph{diagonalize} the Yukawa terms. 
+
+\textsc{Fact}: A complex square matrix can be diagonalized by a \textbf{biunitary} transformation. For any matrix $M^I_{\phantom{I}J}$, there exist unitary matrices $U$ and $V$ such that $UMV^{-1}$ is diagonal.
+
+Argue that you can diagonalize the charged lepton masses, but that you can at most diagonalize \emph{either} the up-type masses or the down-type masses.
+
+\textsc{Comment}: This is the origin of what particle folks call \emph{flavor physics}. The issue is that the $Q$ has only one flavor rotation to donate, but the up-type and down-type Yukawas each need an independent rotation to contribute to the biunitary transformation that diagonalizes the interactions. There is no such discrepancy for the leptons as long as we do not include a right-handed neutrino. 
+
+
+\section{The origin of funny $W^\pm$ interactions}
+
+What do we do when we it seems like we cannot diagonalize a mass matrix? We diagonalize it anyway.  In order to diagonalize both the up-type and down-type mass matrices, we need the $u_L^i$ and the $d_L^i$ particles to rotate independently:
+\begin{align}
+	u_L^i &\to (U_u)^i_{\phantom i j} u_L^j
+	&
+	d_L^i \to (U_d)^i_{\phantom i j} d_L^j \ .
+	\label{eq:ugly:transform}
+\end{align}
+These really \emph{should} only be allowed to rotate by the \emph{same} matrix $U_u = U_d = U_Q$, but we \emph{really} want to diagonalize our masses so that we can have a diagonal Hamiltonian and all that. Maybe we just diagonalize now and ask for forgiveness later, eh?
+
+Here's where the other shoe drops. The interactions of the $Q$ with the $W$ boson are of the form:
+\begin{align}
+	\frac{g}{2} \, (Q^\dag)_a (W^A T^A)^a_{\phantom a b} Q^b
+	&= 
+	\frac{g}{2} \, (Q^\dag)_a (W^AT^A)^a_{\phantom a b} Q^b
+	=
+	\frac{g}{2}
+	\begin{pmatrix}
+		u_L^\dag & d_L^\dag
+	\end{pmatrix}
+	\begin{pmatrix}
+		W^3 & \sqrt{2}W^-\\
+		\sqrt{2}W^+ & -W^3
+	\end{pmatrix}
+	\begin{pmatrix}
+		u_L \\ d_L
+	\end{pmatrix} \ .
+\end{align}
+We have suppressed the flavor indices, which you should now restore. Show that the $W^3$ interactions are invariant under \eqref{eq:ugly:transform}. Show, further, that the $W^\pm$ interactions are \emph{not} invariant under \eqref{eq:ugly:transform}. 
+
+The $W^\pm$ intraction is of the form
+\begin{align}
+	\frac{g}{\sqrt{2}} (u_L^\dag)_i (V_\text{CKM})^i_{\phantom i j} d_L^j \ .
+\end{align}
+Explicitly write out $V_\text{CKM}$ in terms of the matrices $U_u$ and $U_d$ that were needed to diagonalize the mass matrix. 
+
+\textsc{Comment}: this implies that a generation of up-type quarks can talk to a different generation of down-type quark through a $W^\pm$ boson in the basis where all of the masses are diagonal.
+
+\textsc{Hint}: for all of these problems, you may find inspiration in the high-level discussion in Section 3.1 of \texttt{1711.03624}\footnote{\url{https://arxiv.org/abs/1711.03624}}.
+
+\subsection{No neutrino oscillations}
+
+Based on this homework, comment on why the Standard Model with only the `cuddly' matter particles does not predict neutrino oscillations. Neutrinos oscillate when the flavor basis in the neutrinos interact with $W^\pm$ is different from the mass basis in which the neutrinos have definite masses. For example, $V_{\text{CKM}}\neq \mathbbm{1}$ implies that down quarks could oscillate---if we had unbound down quarks.
+
+\subsection{Complex Phases in the Yukawa Couplings (Extra Credit)}
+
+Complete Problem 2.1 in \texttt{arXiv:1711.03624}. Specifically, for $N=3$ generations, how many physical complex phases are in the Standard Model Yukawa matrix? 
+
+\textsc{Comment}: A complex phase in a parameter of the Standard Model implies a violation of matter--antimatter asymmetry. You may have a sense of this from noticing that particles and anti-particles are related by Hermitian conjugation. It turns out that the complex phase in the Standard Model is too small to explain the imbalance between matter and antimatter in our universe. This is an open question in the Standard Model. If you have a really good solution to this that is predictive, testable, and elegant, then you are well on your way towards a Nobel prize.
+
+
+\end{document}
