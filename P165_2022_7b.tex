@@ -249,6 +249,7 @@ Each of the `QudLe' particles has a \acro{U(3)} global symmetry. This means that
 	L^i&\to \left(U_L\right)^i_{\phantom{i}j} L^j
 	&
 	e_R&\to \left(U_e\right)^i_{\phantom{i}j} e_r^j \ .
+	\label{eq:gen}
 \end{align}
 We have suppressed all other indices for clarity. Each of the $U_X$ are independent unitary matrices. Because we've run out of alphabets, we will use $i,j$ indices for each type of fermion, but we cannot contract these indices with each other. For example, we cannot contract $Q^i (d_R^\dag)_i$ because the $Q$ index is $i_Q$ (``belongs to quark doublets''), the $d_R$ index is $i_d$ (``belongs to right-handed down quark'').
 
@@ -264,20 +265,21 @@ Writing out the flavor indices explicitly on the Yukawa terms gives:
 	+
 	(y_u)^i_{\phantom{i}j} Q^\dag_i H^\dag u_R^j
 	+ \text{h.c.} \ ,
+	\label{eq:yukawas}
 \end{align}
 where we have suppressed all other indices. The Yukawa couplings have now been promoted to complex $3\times 3$ matrices. Each component of the matrix corresponds to a Yukawa coupling between one type of doublet and one type of right-handed fermion.
 
 \subsection{General flavor transformation}
 
-The Yukawa matrices are constants: they have indices, but they do not transform. Only the `cuddlies' transform under a flavor transformation. Under the general flavor transformation \eqref{eq:flavor:transform}, write down how each term in \eqref{eq:yukawas} transforms.
+The Yukawa matrices are constants: they have indices, but they do not transform. Only the `cuddlies' transform under a flavor transformation. Under the general flavor transformation \eqref{eq:gen}, write down how each term in \eqref{eq:yukawas} transforms. Recall that even though the $y$ matrices have indices, they have been `frozen in' and \emph{do not transform}.
 
 \subsection{Too many masses}
 
-The general set of Yukawa matrices induce all sorts of masses. For example, each flavor of left-handed up-type quark $(u_L)^I$ is glued to each flavor of right-handed up-type quark, $\bar u_J$ through $(y_u)^J_{\phantom{J I}}$. 
+The general set of Yukawa matrices induce all sorts of masses. For example, each flavor of left-handed up-type quark $(u_L^\dag)_i$ is glued to each flavor of right-handed up-type quark, $(u_R)^j$ through $(y_u)^i_{\phantom{i}j}$. 
 
 However each flavor of `cuddly' particle has identical charges and indices. The only thing that distinguishes them are the Yukawa couplings. We can thus use the general flavor transformation from the previous section to \emph{diagonalize} the Yukawa terms. 
 
-\textsc{Fact}: A complex square matrix can be diagonalized by a \textbf{biunitary} transformation. For any matrix $M^I_{\phantom{I}J}$, there exist unitary matrices $U$ and $V$ such that $UMV^{-1}$ is diagonal.
+\textsc{Fact}: A complex square matrix can be diagonalized by a \textbf{biunitary} transformation. For any matrix $M^i_{\phantom{i}j}$, there exist unitary matrices $U$ and $V$ such that $UMV^{-1}$ is diagonal.
 
 Argue that you can diagonalize the charged lepton masses, but that you can at most diagonalize \emph{either} the up-type masses or the down-type masses.
 
