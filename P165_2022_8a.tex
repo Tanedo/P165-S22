@@ -1,0 +1,266 @@
+\documentclass[12pt]{article}
+%% arXiv paper template by Flip Tanedo
+%% last updated: Dec 2016
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  THE USUAL PACKAGES  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{nopageno}
+\usepackage{enumerate}
+\usepackage{parskip}
+\usepackage{bbm}
+
+\usepackage{sectsty}
+\sectionfont{\Large}
+% \subsectionfont{\large}
+% \renewcommand{\thesection}{}
+% \renewcommand{\thesubsection}{\arabic{subsection}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  PAGE FORMATTING and (RE)NEW COMMANDS  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[margin=2cm]{geometry}   % reasonable margins
+
+\graphicspath{{figures/}}	        % set directory for figures
+
+% for capitalized things
+\newcommand{\acro}[1]{\textsc{\MakeLowercase{#1}}}    
+
+\numberwithin{equation}{section}    % set equation numbering
+\renewcommand{\tilde}{\widetilde}   % tilde over characters
+\renewcommand{\vec}[1]{\mathbf{#1}} % vectors are boldface
+
+\newcommand{\dbar}{d\mkern-6mu\mathchar'26}    % for d/2pi
+\newcommand{\ket}[1]{\left|#1\right\rangle}    % <#1|
+\newcommand{\bra}[1]{\left\langle#1\right|}    % |#1>
+\newcommand{\Xmark}{\text{\sffamily X}}        % cross out
+
+\let\olditemize\itemize
+\renewcommand{\itemize}{
+  \olditemize
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}
+
+
+% Commands for temporary comments
+\newcommand{\comment}[2]{\textcolor{red}{[\textbf{#1} #2]}}
+\newcommand{\flip}[1]{{\color{red} [\textbf{Flip}: {#1}]}}
+\newcommand{\email}[1]{\texttt{\href{mailto:#1}{#1}}}
+
+\newenvironment{institutions}[1][2em]{\begin{list}{}{\setlength\leftmargin{#1}\setlength\rightmargin{#1}}\item[]}{\end{list}}
+
+
+\usepackage{fancyhdr}		% to put preprint number
+
+
+
+% Commands for listings package
+%\usepackage{listings}      % \begin{lstlisting}, for code
+%
+% \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
+%    sets style to small true-type
+
+
+
+%%%%%%%%%%%%%%%%%%%
+%%%  HYPERREF  %%%%
+%%%%%%%%%%%%%%%%%%%
+
+%% This package has to be at the end; can lead to conflicts
+\usepackage{microtype}
+\usepackage[
+	colorlinks=true,
+	citecolor=black,
+	linkcolor=black,
+	urlcolor=green!50!black,
+	hypertexnames=false]{hyperref}
+
+
+
+
+
+\begin{document}
+
+
+\begin{center}
+
+    {\Large \textsc{Short HW 8}:
+    \textbf{The theoretical origin of electromagnetism}}
+    
+\end{center}
+
+\vskip .4cm
+
+\noindent
+\begin{tabular*}{\textwidth}{rl}
+	\textsc{Course:}& Physics 165, \emph{Introduction to Particle Physics} (2022)
+	\\
+	\textsc{Instructor:}& Prof. Flip Tanedo (\email{flip.tanedo@ucr.edu})
+	\\
+	\textsc{Due by:}& \textbf{Thursday}, May 19
+\end{tabular*}
+
+This ``short homework'' is a little more involved. You may find the Lecture 15 notes helpful. The goal for this short homework is to go through the manipulations we presented in class.
+
+\section*{Useful Reference Ideas}
+
+The Higgs vacuum expectation value (``vev'') is
+\begin{align}
+	\langle H \rangle = 
+	\frac{v}{\sqrt{2}}
+	\begin{pmatrix}
+		0\\1
+	\end{pmatrix} \ .
+\end{align}
+The electroweak gauge bosons of SU(2)$_L\times$U(1)$_Y$ pick up a mass from the kinetic term, 
+\begin{align}
+	\left(D_\mu \langle H\rangle\right)^\dag \left(D^\mu \langle H\rangle\right) \ ,
+\end{align}
+where the covariant derivative\footnote{Where did this come from? We motivated the covariant derivative as the natural `promotion' of the ordinary derivative that was required to make SU(2)$_L\times$U(1)$_Y$ a \emph{local} symmetry. This meant that we had to introduce new position-dependent objects (fields... which  are particles) that we identified with the force particles.} is
+\begin{align}
+	D_\mu = \partial_\mu + ig T^A W^A_\mu + ig' q_Y B_\mu \ .
+\end{align}
+Note that we have not written any implicit unit matrices. For example, when $D_\mu$ acts on a doublet, the $T^A$ are $2\times 2$ Hermitian matrices while  the $\partial_\mu$ and $B_\mu$ terms implicitly have a $2\times 2$ unit matrix acting on the SU(2) indices.
+Recall that
+\begin{align}
+	T^1 &= 
+	\frac{1}{2}
+	\begin{pmatrix}
+		0 & 1\\
+		1 & 0
+	\end{pmatrix}
+	&
+	T^2 &= 
+	\frac{1}{2}
+	\begin{pmatrix}
+		0 & -i\\
+		i & 0
+	\end{pmatrix}
+	&
+	T^3 &= 
+	\frac{1}{2}
+	\begin{pmatrix}
+		1 & 0\\
+		 & -1
+	\end{pmatrix} \ ,
+\end{align}
+when acting on doublets like the Higgs.\footnote{When acting on a singlet like the right-handed particles, $T^A$ gives zero since the singlets do not transform and $T^A$ is the matrix that generates an infinitesimal transformation.}  It is obvious that $\partial_\mu \langle H \rangle = 0$ because the vev is constant.
+
+\section{The mass terms}
+
+\subsection{Inserting the vev}
+
+Show that
+\begin{align}
+	D_\mu \langle H \rangle = \frac{i v}{2\sqrt{2}}
+	\begin{pmatrix}
+		g\left(W^1 - i W^2\right) \\
+		g'B - g W^3
+	\end{pmatrix}
+	\equiv 
+	\frac{i v}{2}
+	\begin{pmatrix}
+		gW^+ \\
+		g_z Z
+	\end{pmatrix} \ ,
+\end{align}
+where $g_z^2 = g'^2 + g^2$ is the characteristic $Z$-boson interaction strength. In the last step we just defined the properly normalized $W^+$ and $Z$ bosons. 
+
+
+\subsection{Masses }
+When you take $|D_\mu \langle H\rangle|^2$, you end up with masses
+\begin{align}
+	M_W^2 W^+W^- + \frac{1}{2} M_Z^2 Z^2 \ .
+\end{align}
+The factor of $1/2$ is convention for terms with two identical particles.\footnote{For those interested in doing further reading, this is called a symmetry factor and it has to do with the different permutations of particle creation/annihilation operators.} Show that the masses are
+\begin{align}
+	M_W^2 &= \frac{g^2v^2}{2}
+	&
+	M_Z^2 & \frac{g_Z^2v^2}{2} \ .
+\end{align}
+Which particle is heavier, the $Z$ or the $W$? 
+
+\section{Mixing Angles}
+
+The $Z$ boson is a linear combination of $W^3$ and $B$,
+\begin{align}
+	Z = \frac{-g'}{g_Z} B + \frac{g}{g_Z} W^3
+	\equiv
+	-\sin\theta_W B + \cos\theta_W W^3 \ ,
+\end{align}
+where $\theta_W$ is called the Weinberg angle. You can think of this as a two-dimensional real vector space with basis vectors $|B\rangle$ and $|W^3\rangle$. The $Z$-boson, $|Z\rangle$ is a different basis vector. It is the state that explicitly picked up a mass from the Higgs vev. The photon is the other basis vector in this new (mass eigenstate) basis. It did not pick up a mass, but we can infer the linear combination by requiring that it is orthonormal to the $Z$. Show that (up some choice of signs), the photon is
+\begin{align}
+	A = \frac{g}{g_Z} B + \frac{g'}{g_Z} W^3 \ .
+\end{align}
+\textsc{Comment:} this only a line or two. 
+
+\section*{Extra Credit: photon couplings}
+
+The interactions of matter with the photon are governed by their kinetic terms.
+
+\subsection*{Right-handed matter}
+
+Right-handed matter particles are SU(2) singlets (i.e.\ no $a,b$ indices). Consider the kinetic term for the right-handed up quark:\footnote{I'm being sloppy with overall factors of $i$. Those aren't the point here. I am also suppressing several indices. Once you know they're there, you only need to write them out when you need them.}
+\begin{align}
+	u_R^\dag \sigma^\mu D_\mu u_R \ 
+	= 
+	u_R^\dag \sigma^\mu  \left(\partial_\mu + ig' q_Y B_\mu\right) u_R \ ,
+\end{align}
+where $q_Y$ is the hypercharge of the $u_R$. Show that the interaction with the photon is
+\begin{align}
+	i e q_\text{EM} u_R^\dag \sigma^\mu A u_R
+	&&
+	e&= \sin\theta_W \cos\theta_W g_Z = \cos\theta_W g'
+	&
+	q_\text{EM} = 2/3 \ .
+\end{align}
+We have thus found an expression for the electric coupling $e$ and the electric charge of the (right-handed) up quark, $q_\text{EM}$.
+
+
+
+\subsection*{Left-handed matter}
+
+Left-handed matter are SU(2) doublets. The covariant derivative is thus a $2\times 2$ matrix in SU(2) space. We will not bother with the off diagonal terms (the $W^\pm$ bosons). The diagonal parts are
+\begin{align}
+	D_\mu = \partial_\mu + \frac{ig}{2}
+	\begin{pmatrix}
+		W^3 & \\
+		& -W^3
+	\end{pmatrix}
+	+ 
+	i g' q_Y 
+	\begin{pmatrix}
+		B & \\
+		& B
+	\end{pmatrix} \ ,
+\end{align}
+where we have now written the explicit $2\times 2$ unit matrix on the $B$ term. Show that the photon coupling to the quark doublet $Q$ is
+\begin{align}
+	i e Q^\dag \bar\sigma^\mu  A_\mu (T^3 + q_Y) Q \ ,
+\end{align}
+where $e$ is the same electric coupling defined above and the electric charge $q_\text{EM}=T^3 + q_Y$ is the sum of the $T^3$ eigenvalue ($\pm 1/2$) of the doublet with the hypercharge. Show that the left-handed up quark has the same electric charge as the right-handed up quark. This had to be true since the Yukawa couplings pair the $u_L$ and $u_R$ together into a massive charged fermion (a so-called Dirac fermion).
+
+\subsection*{And all the rest}
+
+Show that the electric charges for the down quark, electron, and neutrino are as you expect. Show that unlike the photon, the $Z$ boson will interact with neutrinos.
+
+
+
+
+ 
+
+
+
+
+\end{document}
