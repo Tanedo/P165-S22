@@ -159,9 +159,31 @@ when acting on doublets like the Higgs.\footnote{When acting on a singlet like t
 
 \section{The mass terms}
 
+\subsection*{Normalizing the gauge bosons}
+\flip{This subsection added 5/17.}
+You can think of $W^{1,2,3}$ and $B$ as an orthonormal basis of fields. This means that
+\begin{align}
+	\langle W^i, W^j\rangle &= \delta^{ij}
+	&
+	\langle W^i, B\rangle &= 0
+	&
+	\langle B, B\rangle &= 1 \ .
+\end{align}
+The definition of the inner product is not important here, but it is $\langle \psi, \phi\rangle = \int d^4x\, \psi^*(x)\phi(x)$. The relevant bit here is that terms that look like $|W^i|^2$ are normalized to one and cross terms like $B^*W^1$ go to zero. Consider the $W^+$ boson. We know that it is 
+\begin{align}
+	W^+ = \mathcal N \left(W^1 + i W^2\right) \ ,
+\end{align}
+we can determine the normalization $\mathcal N$ by fixing $|W^+|^2 = \mathcal N^2 \left(|W^1|^2 + |W^2|^2\right)$ = 1. This means
+\begin{align}
+	\mathcal N = \frac{1}{\sqrt{2}} \ .
+\end{align}
+The linear combination for the $Z$ boson is proportional to the combination that gets a mass.
+
+
+
 \subsection{Inserting the vev}
 
-Show that
+Show that \flip{Corrected 5/17, thanks Robert V.}
 \begin{align}
 	D_\mu \langle H \rangle = \frac{i v}{2\sqrt{2}}
 	\begin{pmatrix}
@@ -169,13 +191,13 @@ Show that
 		g'B - g W^3
 	\end{pmatrix}
 	\equiv 
-	\frac{i v}{2}
+	\frac{i v}{2\sqrt{2}}
 	\begin{pmatrix}
-		gW^+ \\
-		g_z Z
+		g\sqrt{2}W^+ \\
+		-g_z Z
 	\end{pmatrix} \ ,
 \end{align}
-where $g_z^2 = g'^2 + g^2$ is the characteristic $Z$-boson interaction strength. In the last step we just defined the properly normalized $W^+$ and $Z$ bosons. 
+where $g_z^2 = g'^2 + g^2$ is the characteristic $Z$-boson interaction strength. In the last step we just defined the properly normalized $W^+$ and $Z$ bosons. Based on the above note, convince yourself that $g'B-gW^3 = -g_z Z$ with respect to the properly normalized $Z$. The minus sign is conventional. 
 
 
 \subsection{Masses }
@@ -185,11 +207,11 @@ When you take $|D_\mu \langle H\rangle|^2$, you end up with masses
 \end{align}
 The factor of $1/2$ is convention for terms with two identical particles.\footnote{For those interested in doing further reading, this is called a symmetry factor and it has to do with the different permutations of particle creation/annihilation operators.} Show that the masses are
 \begin{align}
-	M_W^2 &= \frac{g^2v^2}{2}
+	M_W^2 &= \frac{g^2v^2}{4}
 	&
-	M_Z^2 & \frac{g_Z^2v^2}{2} \ .
+	M_Z^2 &= \frac{g_Z^2v^2}{4} \ .
 \end{align}
-Which particle is heavier, the $Z$ or the $W$? 
+Which particle is heavier, the $Z$ or the $W$? \flip{Corrected 5/17, thanks Robert V.}
 
 \section{Mixing Angles}
 
