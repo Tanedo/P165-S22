@@ -1,0 +1,189 @@
+\documentclass[12pt]{article}
+%% arXiv paper template by Flip Tanedo
+%% last updated: Dec 2016
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  THE USUAL PACKAGES  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{nopageno}
+\usepackage{enumerate}
+\usepackage{parskip}
+\usepackage{bbm}
+
+\usepackage{sectsty}
+\sectionfont{\Large}
+% \subsectionfont{\large}
+% \renewcommand{\thesection}{}
+% \renewcommand{\thesubsection}{\arabic{subsection}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%  PAGE FORMATTING and (RE)NEW COMMANDS  %%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[margin=2cm]{geometry}   % reasonable margins
+
+\graphicspath{{figures/}}	        % set directory for figures
+
+% for capitalized things
+\newcommand{\acro}[1]{\textsc{\MakeLowercase{#1}}}    
+
+\numberwithin{equation}{section}    % set equation numbering
+\renewcommand{\tilde}{\widetilde}   % tilde over characters
+\renewcommand{\vec}[1]{\mathbf{#1}} % vectors are boldface
+
+\newcommand{\dbar}{d\mkern-6mu\mathchar'26}    % for d/2pi
+\newcommand{\ket}[1]{\left|#1\right\rangle}    % <#1|
+\newcommand{\bra}[1]{\left\langle#1\right|}    % |#1>
+\newcommand{\Xmark}{\text{\sffamily X}}        % cross out
+
+\let\olditemize\itemize
+\renewcommand{\itemize}{
+  \olditemize
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}
+}
+
+
+% Commands for temporary comments
+\newcommand{\comment}[2]{\textcolor{red}{[\textbf{#1} #2]}}
+\newcommand{\flip}[1]{{\color{red} [\textbf{Flip}: {#1}]}}
+\newcommand{\email}[1]{\texttt{\href{mailto:#1}{#1}}}
+
+\newenvironment{institutions}[1][2em]{\begin{list}{}{\setlength\leftmargin{#1}\setlength\rightmargin{#1}}\item[]}{\end{list}}
+
+
+\usepackage{fancyhdr}		% to put preprint number
+
+
+
+% Commands for listings package
+%\usepackage{listings}      % \begin{lstlisting}, for code
+%
+% \lstset{basicstyle=\ttfamily\footnotesize,breaklines=true}
+%    sets style to small true-type
+
+
+
+%%%%%%%%%%%%%%%%%%%
+%%%  HYPERREF  %%%%
+%%%%%%%%%%%%%%%%%%%
+
+%% This package has to be at the end; can lead to conflicts
+\usepackage{microtype}
+\usepackage[
+	colorlinks=true,
+	citecolor=black,
+	linkcolor=black,
+	urlcolor=green!50!black,
+	hypertexnames=false]{hyperref}
+
+
+
+
+
+\begin{document}
+
+
+\begin{center}
+
+    {\Large \textsc{Short HW 10}:
+    \textbf{A hint of loop diagrams}}
+    
+\end{center}
+
+\vskip .4cm
+
+\noindent
+\begin{tabular*}{\textwidth}{rl}
+	\textsc{Course:}& Physics 165, \emph{Introduction to Particle Physics} (2022)
+	\\
+	\textsc{Instructor:}& Prof. Flip Tanedo (\email{flip.tanedo@ucr.edu})
+	\\
+	\textsc{Due by:}& \textbf{Thursday}, June 2
+\end{tabular*}
+
+Please have all assignments turned in by the end of this week. This short assignment is especially short, but it is a peek into what a full quantum field theory calculation looks like. The full calculation is in Chapter 10 of Peskin \& Schroeder's \emph{Introduction to Quantum Field Theory}. 
+
+\section{Defining the four-point interaction}
+
+Suppose you have a theory with a particle $\varphi$ with a four-point self-interaction whose coupling strength is $\lambda$. That is, your lagrangian has a term that looks like $\mathcal L \sim \lambda \varphi^4$. If you calculate the scattering of 2 particles into 2 particles, your amplitude to leading order is just $\lambda$, up to some numerical factors.
+
+At next-to-leading order, we introduce loop diagrams. Here are the diagrams up to `one loop' level  (from Peskin \& Schroder):
+\begin{center}
+\includegraphics[width=.6\textwidth]{figures/peskin1020.jpg}
+\end{center}
+The first term is the usual leading-order `tree-level' diagram. The three terms in parenthesis are obviously the loop diagrams that go like $\lambda^2$.  Feel free to take a peek at Peskin \& Schroder chapter 10 to see what's going on in its full technical glory.
+
+\subsection{Distinct diagrams}
+
+Assume that each particle has a distinct momentum, say $p_1$ and $p_2$ for the incoming particles, and $q_1$ and $q_2$ for the outgoing particles. Explain why the three loop diagrams are all \emph{distinct} diagrams that tell different spacetime histories. 
+
+\subsection{Renormalization conditions}
+
+Let us now revise our notation. Let's call the coupling in the Lagrangian $\lambda_0$ to distinguish it from the physical coupling, $\lambda$. Here's how this works:
+\begin{enumerate}
+	\item If we are calculating only to leading order, then $\lambda_0 = \lambda$.
+	\item If we are calculating to loop-level, then the sum of the three diagrams above should give $\lambda$ (again, up to numerical factors). 
+\end{enumerate}
+Because the loop diagrams go like a higher power of $\lambda$ and we're doing a Taylor expansion in $\lambda$, we expect them to  be small corrections, so that $\lambda_0\approx \lambda$. However, we now know that this is not true: the loop diagrams seem be infinite because of the integral over the internal loop momentum. This means that $\lambda_0$ differs from $\lambda$ by a formally infinite amount. 
+
+In order to deal with this, we split $\lambda_0$ into the physical part and `everything else': $\lambda_0 = \lambda + \delta_\lambda$. This last term is called a `counter term,' but it is just our way of peeling off the non-physical piece of $\lambda_0$. 
+
+The sum of the four diagrams above is
+\begin{align}
+	\lambda_\text{phys} = \lambda - \lambda^2
+	\left[
+		V(s)
+		+ V(t)
+		+ V(u)
+	\right]
+	+ \delta_\lambda
+	 \ .
+	\label{eq:defining}
+\end{align}
+Here $V$ is the loop integral function that encodes the formally divergent integral. The arguments are the so-called Mandelstam variables that encode the Lorentz invariants that encode all of the kinematic data\footnote{There are four 4-momenta, they are constrained by total momentum conservation. Further, we know these should show up as Lorentz invariant objects. The particle mass and the Mandelstam variable encode all of these Lorentz invariants.}:
+\begin{align}
+	s &= (p_1 + p_2)^2
+	&
+	t &= (k_1-p_1)^2
+	&
+	u &= (k_1-p_2)^2 \ .
+\end{align}
+In order to define our theory, we have to make a measurement of $\lambda$. We now know that the properties of the measurement are part of the definition of the theory. Suppose we perform our experiment by scattering two \emph{very} slow $\varphi$ particles in the system's rest frame. This means we can ignore their kinetic energies. We then measure the physical coupling\footnote{Formally, we measure the rate or cross section, then infer the physical coupling from the appropriate cross section formula.} to be $\lambda_\text{meas}$. 
+
+Show that this defines $\delta_0$ at the one-loop level:
+\begin{align}
+	\lambda_\text{meas} = \lambda - \lambda^2\left[
+		V(4m^2)
+		+ V(0)
+		+ V(0)
+	\right]  +\delta_\lambda \ ,
+\end{align}
+where $m$ is the mass of the $\varphi$. Note: since we are doing perturbation theory, you can set 
+
+
+This is just an exercise in kinematics and plugging in the appropriate values of $s$, $t$, and $u$ as defined above. However, please appreciate what is happening here: the definition of the Lagrangian parameter $\lambda_0$ depends the properties of how we measured it. We now have $\lambda_0$ (equivalently $\delta_\lambda$) defined unambiguously, which means we can now calculate (and \emph{predict}) the loop-level rate for $2\varphi\to 2\varphi$ at, say, very high energies. Note that this rate will be different and will inherit the momentum dependence of the $\lambda_0$-defining measurement at $s=4m^2$.
+
+\subsection{An explicit example}
+
+We actually get to choose \emph{how} we parameterize the apparent divergence in the loop diagrams. One convenient method is called dimensional regularization. In this scheme, the function $V(p^2)$ is
+\begin{align}
+	V(p^2) &= \lim_{\varepsilon\to 0} \frac{-1}{32\pi^2}\int_0^1 dx
+	\left[ \frac{2}{\varepsilon} - \log\left(m^2 - x(1-x)p^2\right) \right] \ .
+\end{align}
+Show that once $\lambda_0$ is defined for any values of $s$, $t$, and $u$, the divergent $2/\varepsilon$ pieces cancel for any other values of $s$, $t$, and $u$. \textsc{Hint:} the divergent piece does not depend on the kinematics at all. Thus there is simply a term in $\delta_\lambda$ that is proportional to the total divergence with an overall minus sign.
+
+
+
+
+
+\end{document}
